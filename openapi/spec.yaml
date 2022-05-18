@@ -1,0 +1,71 @@
+openapi: '3.0.2'
+info:
+  title: REST Starter Kit
+  description: This is a starter kit that can be used to create microservice
+  version: '1.0.0'
+  
+servers:
+  - url: https://localhost/starterkit/v1
+    description: localhost
+
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      description: Application health check
+      operationId: app.health
+      responses:
+        '200':
+          description: Status message from server describing current health
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/health-response'
+
+  /greetings/{word}:
+    get:
+      tags:
+        - greetings
+      description: Test end-point and to say hi!
+      operationId: controller.greeting.get_hello
+      parameters:
+        - in: path
+          name: word
+          description: Give me some word, I want to learn
+          required: true
+          schema:
+            type: string
+          example: 'One'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/word-message'
+
+components:
+  schemas:
+    health-response:
+      type: object
+      properties:
+        msg:
+          type: string
+          description: Health check response
+    word-message:
+      type: object
+      properties:
+        input:
+          type: string
+          description: Word entered by user
+          example: 201301
+        message:
+          type: string
+          description: Message from computer
+          example: 'Hi there how are you'
+        word_count:
+          type: integer
+          description: No's of words that I have
+          example: 46       
+

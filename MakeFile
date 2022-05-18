@@ -1,0 +1,13 @@
+run: setup
+
+setup:
+	python -m venv .env
+	.\.env\Scripts\activate
+	pip install -r .\requirements.txt
+
+test:
+	python -m venv .testenv
+	.\.testenv\Scripts\activate
+	pip install -r .\requirements.txt
+	pip install -r .\test-requirements.txt
+	pytest .\tests\unit
