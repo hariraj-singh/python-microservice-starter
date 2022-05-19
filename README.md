@@ -59,7 +59,11 @@ To launch the service locally you can use the following command
 - URL to open Swagger UI - http://localhost:5001/starterkit/v1/ui/
 
 ## Run Service on Docker
-WIP
+Follow the steps below to create and run as a container
+
+- You can use docker-compose to build and run the application
+    > ```docker compose -p Starter-Kit -f .\docker-compose.yaml up -d```
+- URL to open the Swagger UI - http://localhost:8080/starterkit/v1/ui/
 
 
 # Testing the service

@@ -1,16 +1,19 @@
-FROM python:3.6-alpine
+FROM python:alpine3.10
 
-# RUN mkdir -p /usr/src/app
-# WORKDIR /usr/src/app
+RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/openapi
+WORKDIR /usr/src/app
 
-# COPY requirements.txt /usr/src/app/
+COPY requirements.txt /usr/src/app/
 
-# RUN pip3 install --no-cache-dir -r requirements.txt
+## install the modules
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-# COPY . /usr/src/app
+COPY /openapi/. /usr/src/openapi
+COPY /src/. /usr/src/app
 
-# EXPOSE 8080
+EXPOSE 5001
 
-# ENTRYPOINT ["python3"]
-
-# CMD ["-m", "swagger_server"]
+ENTRYPOINT ["python3"]
+CMD ["app.py"]

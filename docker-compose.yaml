@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  starter-kit:
+    build:
+      dockerfile: dockerfile
+    ports:
+      - "8080:5001"
+    # restart: unless-stopped
+
