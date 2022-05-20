@@ -9,26 +9,12 @@ servers:
     description: localhost
 
 paths:
-  /health:
-    get:
-      tags:
-        - Health
-      description: Application health check
-      operationId: app.health
-      responses:
-        '200':
-          description: Status message from server describing current health
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/health-response'
-
   /greetings/{word}:
     get:
       tags:
         - greetings
-      description: Test end-point and to say hi!
-      operationId: controller.greeting.get_hello
+      description: Get information about the given word
+      operationId: controllers.word_controller.get_word
       parameters:
         - in: path
           name: word
@@ -47,12 +33,6 @@ paths:
 
 components:
   schemas:
-    health-response:
-      type: object
-      properties:
-        msg:
-          type: string
-          description: Health check response
     word-message:
       type: object
       properties:
