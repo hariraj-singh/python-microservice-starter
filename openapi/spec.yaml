@@ -53,6 +53,7 @@ components:
         msg:
           type: string
           description: Health check response
+          example: I am alive
     word-message:
       type: object
       properties:

@@ -6,5 +6,5 @@ services:
       dockerfile: dockerfile
     ports:
       - "8080:5001"
-    # restart: unless-stopped
+    restart: unless-stopped
 
