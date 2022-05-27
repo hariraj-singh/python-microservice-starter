@@ -25,6 +25,8 @@ options = {
     }
 }
 
+exception_codes = [401,403,405,500]
+
 
 if __name__ == '__main__':
     """
@@ -36,8 +38,14 @@ if __name__ == '__main__':
                              server='flask')
     app.add_api('spec.yaml')
     app.add_url_rule("/health", "health", health)
+    
+    # Exception handlers
     app.add_error_handler(exceptions.NotFoundException, exception_handlers.not_found_handler)
     app.add_error_handler(exceptions.BadRequestException, exception_handlers.bad_request_handler)
+
+    for i in exception_codes:
+        app.add_error_handler(i, exception_handlers.internal_server_handler)
+
 
 
 

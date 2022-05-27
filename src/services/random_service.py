@@ -2,7 +2,6 @@
 This module represents a service layer for random controller
 """
 
-import logging
 from models.random_model import random_num_response, otp_response
 import random
 import exception_handler.exceptions as ex
@@ -32,6 +31,9 @@ class random_service():
 
 
     def get_otp_count(operationType) -> otp_response:
+        """
+        Dummy method to test the various exceptions
+        """
         opType = operationType 
         counter = {}
 
@@ -40,9 +42,9 @@ class random_service():
         
         # counter['otpSend'] =  2
         # counter['otpValidate'] = 1
-        try:    
+        try:
             if len(counter) == 0:
-                raise ex.NotFoundException('123456789')
+                raise ex.NotFoundException('SRVX404', 'No data found', 'Invalid mobile')
 
             if opType == 'SendOTP':
                 return_object = otp_response(
@@ -55,10 +57,10 @@ class random_service():
                     countRemaining = 3 - counter.get('otpValidate')
                 )
             else:
-                raise ex.BadRequestException(opType)
-        except(ex.NotFoundException, ex.BadRequestException) as e:
-            raise e
+                raise ex.BadRequestException('SRVX400', 'Bad request', 'Invalid operation type')
+        except ex.NotFoundException as nfe:
+            raise nfe
+        except ex.BadRequestException as bfe:
+            raise bfe
 
         return return_object
-
-

@@ -1,9 +1,13 @@
+"""
+This module contains the various exception handlers
+"""
+
+from flask import jsonify
+
 
 def not_found_handler(error):
     return {
-        "message": "Not Found",
-        "code": 404,
-
+        "detail": str(error),
     }, 404
 
 
@@ -11,16 +15,13 @@ def not_found_handler(error):
 def bad_request_handler(error):
     return {
         "detail": str(error),
-        "status": 400,
-        "title": "Bad Request",
     }, 400
 
 
-def internal_Sv(error):
+def internal_server_handler(error):
     return {
-        "detail": str(error),
-        "status": 500,
-        "title": "SWW",
-    }, 500
+        "error_code": 'SRVX400',
+        "message": "BadRequest",
+    }, 400
 
   
