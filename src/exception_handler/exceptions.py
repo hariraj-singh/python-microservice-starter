@@ -9,20 +9,7 @@ class NotFoundException(RuntimeError):
     """Not found."""
 
 class MyDataNotFound(NotFoundException):
-    def __init__(self, error_code, message, detail):
-        res = {
-            "error_code" : error_code,
-            "message" : message,
-            "detail" : detail
-        }
-        logging.info(f"response : {res}")
-        super().__init__(res)
-
-
-class BadRequestException(RuntimeError):
-    """Bad Request"""
-
-class MyBadRequest(BadRequestException):
+    error_object = {}
     def __init__(self, error_code, message, detail):
         response = {
             "error_code" : error_code,
@@ -31,6 +18,37 @@ class MyBadRequest(BadRequestException):
         }
         logging.info(f"response : {response}")
         super().__init__(response)
+        self.set_error_object(response)
+
+    def set_error_object(self, response):
+        self.error_object = response
+    
+    def get_error_object(self):
+        return self.error_object
+        
+
+
+class BadRequestException(RuntimeError):
+    """Bad Request"""
+
+class MyBadRequest(BadRequestException):
+    error_object = {}
+    def __init__(self, error_code, message, detail):
+        response = {
+            "error_code" : error_code,
+            "message" : message,
+            "detail" : detail
+        }
+        logging.info(f"response : {response}")
+        super().__init__(response)
+        self.set_error_object(response)
+
+    def set_error_object(self, response):
+        self.error_object = response
+    
+    def get_error_object(self):
+        return self.error_object
+        
     
 
 class InternalServerError(RuntimeError):

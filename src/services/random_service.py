@@ -44,7 +44,7 @@ class random_service():
         # counter['otpValidate'] = 1
         try:
             if len(counter) == 0:
-                raise ex.NotFoundException('SRVX404', 'No data found', 'Invalid mobile')
+                raise ex.MyDataNotFound('NFX404', 'No data found', 'Invalid mobile')
 
             if opType == 'SendOTP':
                 return_object = otp_response(
@@ -57,7 +57,7 @@ class random_service():
                     countRemaining = 3 - counter.get('otpValidate')
                 )
             else:
-                raise ex.BadRequestException('SRVX400', 'Bad request', 'Invalid operation type')
+                raise ex.MyBadRequest('BDX400', 'Bad request', 'Invalid operation type')
         except ex.NotFoundException as nfe:
             raise nfe
         except ex.BadRequestException as bfe:
